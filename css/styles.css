@@ -35,6 +35,7 @@
 
 body {
     font-family: var(--font-body);
+    background: linear-gradient(var(--white), #f0f1ff);
 
     & .btn {
         text-decoration: none;
@@ -48,7 +49,7 @@ body {
 
 
 header,
-footer {
+.footer-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -66,11 +67,12 @@ header {
 
     & .btn {
         background: var(--dark-blue);
+        transition: background ease 0.5s;
     }
 }
 
 main {
-    background: linear-gradient(var(--white), #f0f1ff);
+    
 
     & .hero {
         & > *:not(.image-wrapper) {
@@ -112,6 +114,7 @@ main {
                 padding: 15px 37px;
                 border-radius: 31.5px;
                 margin-bottom: 24px;
+                transition: opacity ease 0.5s;
             }
         } 
     }
@@ -200,6 +203,7 @@ main {
                     font-size: var(--text-lg);
                     line-height: var(--line-base);
                     font-weight: var(--bold);
+                    transition: color ease 0.5s;
                 }
             }
         }
@@ -209,15 +213,33 @@ main {
 
 footer {
     background: var(--dark-blue);
-    padding-block: 36px;
 
-    & .btn {
-        background: var(--gradient2);
+    & .footer-wrapper {
+        padding-block: 36px;
+
+        & .btn {
+            background: var(--gradient2);
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border-radius: 28px;
+                background: rgba(255, 255, 255, 0.5);
+                opacity: 0;
+                transition: opacity ease 0.5s;
+            }
+        }
     }
 }
 
-@media (48em <= width <= 64em) {
+@media (width >= 48em) {
     :root {
+        --line-lg: 40px;
         --side-spacing: 40px;
     }
     
@@ -267,6 +289,7 @@ footer {
             & > div:first-child {
                 margin-top: 24px;
                 padding-top: 12.5%;
+
             }
 
             & .course {
@@ -276,5 +299,95 @@ footer {
             }
         }
 
+    }
+}
+
+@media (width >= 64em) {
+    :root {
+        --text-base: 1.125rem;
+        --text-lg: 1.5rem;
+        --text-xl: 2rem;
+        --text-2xl: 3.5rem;
+        --side-spacing: 0px;
+    }
+    main,
+    header,
+    .footer-wrapper {
+        max-width: 1110px;
+        margin: 0 auto;
+    }
+
+    main {
+        & .hero {
+            margin-bottom: 60px;
+
+            & > div:first-child {
+                margin-block: 180px 220px;
+            }
+
+            & .image-wrapper {
+                margin-top: 20px;
+
+                & img {
+                    content: url(../assets/image-hero-desktop@2x.png);
+                    right: 40px;
+                }
+            }
+        }
+        & .courses {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 325px;
+            grid-auto-rows: 325px;
+            column-gap: 30px;
+            row-gap: 56px;
+
+            & .course {
+                & .wrapper {
+                    & a {
+                        text-decoration: none;
+                        color: var(--pink);
+                        font-size: var(--text-base);
+                        line-height: var(--line-base);
+                        font-weight: var(--bold);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (hover: hover) {
+    header {
+        & .btn:hover {
+            background: var(--grey-blue);
+        }
+    }
+
+    main {
+        & .hero {
+            & > div:first-child {
+                & .btn:hover {
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        & .courses {
+            & .course {
+                & .wrapper {
+                    & a:hover {
+                        color: var(--light-pink);
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        & .footer-wrapper {
+            & .btn:hover::before {
+                opacity: 1;
+            }
+        }
     }
 }
