@@ -29,6 +29,7 @@ Users should be able to:
 - CSS Grid
 - Nested CSS
 - Mobile-first workflow
+- Javascript
 
 ## Author
 
